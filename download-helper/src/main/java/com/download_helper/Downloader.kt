@@ -67,9 +67,9 @@ class Downloader(private val context: Context,
             var downloadedSize = 0
             var counter = 0
             val input = BufferedInputStream(urlConnection.inputStream)
+            bufferLength = input.read(buffer)
 
             while (bufferLength > 0) {
-                bufferLength = input.read(buffer)
                 fileOutput.write(buffer, 0, bufferLength)
                 downloadedSize += bufferLength
                 counter += bufferLength
@@ -77,6 +77,7 @@ class Downloader(private val context: Context,
                     notifyProgress(downloadedSize, totalSize)
                     counter = 0
                 }
+                bufferLength = input.read(buffer)
             }
 
             notifySuccess(url, file)

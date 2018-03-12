@@ -1,8 +1,13 @@
 package com.downloadhelper
 
+import android.Manifest
+import android.content.pm.PackageManager
 import android.os.Bundle
 import android.os.Handler
+import android.support.v4.app.ActivityCompat
+import android.support.v4.content.ContextCompat
 import android.support.v7.app.AppCompatActivity
+import android.util.Log
 import android.widget.Toast
 import com.download_helper.Download
 import com.download_helper.Downloader
@@ -13,11 +18,13 @@ class MainActivity : AppCompatActivity(), Download.OnDownloadListener{
     override fun onSuccess(url: String, file: File) {
         Toast.makeText(this, "Done", Toast.LENGTH_SHORT).show()
         progress.text = file.absolutePath
+        Log.d("Progress", file.path)
     }
 
     override fun onProgressUpdate(currentProgress: Int, total: Int) {
         val loadingProgress = "Loading: $currentProgress/$total"
         progress.text = loadingProgress
+        Log.d("Progress", loadingProgress)
     }
 
     override fun onFailure(e: Exception) {
@@ -29,9 +36,25 @@ class MainActivity : AppCompatActivity(), Download.OnDownloadListener{
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
+
+
         load.setOnClickListener {
-            Downloader.init(this, Handler(), this)
-                .download(url.text.toString())
+            if (ContextCompat.checkSelfPermission(this, Manifest.permission.WRITE_EXTERNAL_STORAGE)
+                    != PackageManager.PERMISSION_GRANTED) {
+                if (ActivityCompat.shouldShowRequestPermissionRationale(this,
+                                Manifest.permission.READ_CONTACTS)) {
+
+
+                } else {
+                    ActivityCompat.requestPermissions(this,
+                            arrayOf(Manifest.permission.WRITE_EXTERNAL_STORAGE),
+                            1)
+                }
+            } else {
+                Downloader.init(this, Handler(), this)
+                        .download("http://www.pdf995.com/samples/pdf.pdf", "file123")
+            }
+
         }
     }
 }
