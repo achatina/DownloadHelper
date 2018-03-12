@@ -10,7 +10,8 @@ To start dowload just do like that:
                         
 Then implement Download.OnDownloadListener interface (or pass it as a third varable in init() mehtod)
 
-```override fun onSuccess(url: String, file: File) {
+```
+override fun onSuccess(url: String, file: File) {
         Toast.makeText(this, "Done", Toast.LENGTH_SHORT).show()
     }
 
