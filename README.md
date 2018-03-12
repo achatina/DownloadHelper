@@ -22,7 +22,8 @@ Then implement Download.OnDownloadListener interface (or pass it as a third vara
     override fun onFailure(e: Exception) {
         val error = "Error: ${e.message}"
         Log.e(TAG, error)
-    }```
+    }
+```
 
 And don't forget about permissions! It needs this permissions: INTERNTER, WRITE/READ_EXTERNAL_STORAGE and ACCESS_NETWORK_STATE.
 
