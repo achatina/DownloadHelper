@@ -7,7 +7,6 @@ import android.os.Handler
 import android.support.v4.app.ActivityCompat
 import android.support.v4.content.ContextCompat
 import android.support.v7.app.AppCompatActivity
-import android.util.Log
 import android.widget.Toast
 import com.download_helper.Download
 import com.download_helper.Downloader
@@ -15,16 +14,16 @@ import kotlinx.android.synthetic.main.activity_main.*
 import java.io.File
 
 class MainActivity : AppCompatActivity(), Download.OnDownloadListener{
+
+
     override fun onSuccess(url: String, file: File) {
         Toast.makeText(this, "Done", Toast.LENGTH_SHORT).show()
         progress.text = file.absolutePath
-        Log.d("Progress", file.path)
     }
 
     override fun onProgressUpdate(currentProgress: Int, total: Int) {
         val loadingProgress = "Loading: $currentProgress/$total"
         progress.text = loadingProgress
-        Log.d("Progress", loadingProgress)
     }
 
     override fun onFailure(e: Exception) {
@@ -52,7 +51,7 @@ class MainActivity : AppCompatActivity(), Download.OnDownloadListener{
                 }
             } else {
                 Downloader.init(this, Handler(), this)
-                        .download("http://www.pdf995.com/samples/pdf.pdf", "file123")
+                        .download(url.text.toString())
             }
 
         }

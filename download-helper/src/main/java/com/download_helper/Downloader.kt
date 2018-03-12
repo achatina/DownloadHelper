@@ -4,6 +4,7 @@ package com.download_helper
 import android.content.Context
 import android.net.ConnectivityManager
 import android.os.Handler
+import android.util.Log
 import java.io.BufferedInputStream
 import java.io.File
 import java.io.FileOutputStream
@@ -29,8 +30,25 @@ class Downloader(private val context: Context,
 
         @JvmStatic
         fun extractNameFromUrl(url: String)
-                : String = url.substring(url.lastIndexOf('/') + 1)
-
+                : String {
+            var name = url.substring(url.lastIndexOf('/') + 1)
+            name = name.replace("?", "")
+            name = name.replace(".", "")
+            name = name.replace("/", "")
+            name = name.replace("«", "")
+            name = name.replace(",", "")
+            name = name.replace(";", "")
+            name = name.replace(":", "")
+            name = name.replace("]", "")
+            name = name.replace("[", "")
+            name = name.replace("=", "")
+            name = name.replace("+", "")
+            if (name.length > 8){
+                name = name.substring(name.length - 8, name.length)
+            }
+            Log.d("Name: ", name)
+            return name
+        }
     }
 
     override fun download(url: String) {
@@ -63,7 +81,7 @@ class Downloader(private val context: Context,
             val urlConnection = urlObj.openConnection() as HttpURLConnection
             val totalSize = urlConnection.contentLength
             val buffer = ByteArray(BUFFER_LENGTH)
-            var bufferLength = 0
+            var bufferLength :Int
             var downloadedSize = 0
             var counter = 0
             val input = BufferedInputStream(urlConnection.inputStream)
