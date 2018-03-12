@@ -62,10 +62,10 @@ class Downloader(private val context: Context,
             val urlObj = URL(url)
             val urlConnection = urlObj.openConnection() as HttpURLConnection
             val totalSize = urlConnection.contentLength
-            var downloadedSize = 0
-            var counter = 0
             val buffer = ByteArray(BUFFER_LENGTH)
             var bufferLength = 0
+            var downloadedSize = 0
+            var counter = 0
             val input = BufferedInputStream(urlConnection.inputStream)
 
             while (bufferLength > 0) {
