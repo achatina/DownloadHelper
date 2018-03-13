@@ -4,6 +4,12 @@ A small library to help developers download file.
 
 ## Getting Started
 
+Add library to Gradle:
+
+```
+compile 'com.github.achatina:downloadhelper:0.1'
+```
+
 To start dowload just do like that:
 
 ```Downloader.init(context, Handler(), this).download(URL)```
@@ -15,12 +21,12 @@ override fun onSuccess(url: String, file: File) {
         Toast.makeText(this, "Done", Toast.LENGTH_SHORT).show()
     }
 
-    override fun onProgressUpdate(currentProgress: Int, total: Int) {
+override fun onProgressUpdate(currentProgress: Int, total: Int) {
         val loadingProgress = "Loading: $currentProgress/$total"
         Log.d(TAG, loadingProggress)
     }
 
-    override fun onFailure(e: Exception) {
+override fun onFailure(e: Exception) {
         val error = "Error: ${e.message}"
         Log.e(TAG, error)
     }
