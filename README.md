@@ -46,3 +46,12 @@ There are three download methods (for now).
 
 3. In this method you can give yout custom names and custom path
 ```download(url: String, path: String, fileName: String)```
+
+### Checklist
+
+**v.0.0.1**
+- [x] downloading files
+- [x] set custom path and file name
+
+**v.0.0.2**
+- [ ] dismiss downloading
