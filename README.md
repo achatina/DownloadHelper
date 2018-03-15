@@ -4,12 +4,6 @@ A small library to help developers download file.
 
 ## Getting Started
 
-Add library to Gradle:
-
-```
-compile 'com.github.achatina:downloadhelper:0.1'
-```
-
 To start dowload just do like that:
 
 ```Downloader.init(context, Handler(), this).download(URL)```
