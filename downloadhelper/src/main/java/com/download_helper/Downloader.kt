@@ -32,6 +32,9 @@ class Downloader(private val context: Context,
         fun extractNameFromUrl(url: String)
                 : String {
             var name = url.substring(url.lastIndexOf('/') + 1)
+            if (name.length > 8){
+                name = name.substring(name.length - 8, name.length)
+            }
             name = name.replace("?", "")
             name = name.replace(".", "")
             name = name.replace("/", "")
@@ -43,10 +46,6 @@ class Downloader(private val context: Context,
             name = name.replace("[", "")
             name = name.replace("=", "")
             name = name.replace("+", "")
-            if (name.length > 8){
-                name = name.substring(name.length - 8, name.length)
-            }
-            Log.d("Name: ", name)
             return name
         }
     }
