@@ -1,3 +1,5 @@
+# I don't have time to contribute or do anything with it. So if you found this - don't use it. :)
+
 # Download Helper
 
 A small library to help developers download file.
